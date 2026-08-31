@@ -20,4 +20,6 @@ else
   npx cap sync ios
 fi
 
+node scripts/configure-ios.mjs
+npx cap sync ios
 npx cap open ios
