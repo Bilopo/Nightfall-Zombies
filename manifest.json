@@ -1,0 +1,10 @@
+{
+  "name": "Nightfall Zombies",
+  "short_name": "Nightfall",
+  "start_url": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#07090d",
+  "theme_color": "#07090d",
+  "description": "FPS survival zombies mobile en 3D."
+}
