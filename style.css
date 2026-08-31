@@ -1,0 +1,39 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--red:#ff2a2a;--orange:#ff7a1a;--ink:#07090d;--glass:rgba(10,14,20,.72)}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;font-family:Inter,system-ui,-apple-system,sans-serif;color:#fff;touch-action:none}
+#game,canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.hidden{display:none!important}
+.screen{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 35%,rgba(150,20,15,.22),rgba(0,0,0,.93) 55%),linear-gradient(#05070a,#000);z-index:30}
+.panel{width:min(520px,100%);text-align:center;padding:28px 24px 30px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(18,21,28,.86),rgba(7,9,13,.92));border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.eyebrow{font-size:11px;letter-spacing:.28em;color:#9da5b1;font-weight:700}
+h1{font-size:clamp(42px,12vw,86px);line-height:.78;margin:18px 0 20px;letter-spacing:-.07em}h1 span{color:var(--red)}
+.panel p{color:#b7bec8;margin:0 auto 22px;max-width:360px}
+#startBtn{width:100%;height:60px;border:0;border-radius:16px;background:linear-gradient(180deg,#ff3b2f,#c91414);color:#fff;font-weight:900;font-size:18px;box-shadow:0 12px 40px rgba(255,35,25,.28)}
+.tips{display:grid;gap:6px;margin-top:18px;color:#777f8c;font-size:12px}
+#hud{position:fixed;inset:0;pointer-events:none;z-index:10;padding-top:env(safe-area-inset-top)}
+.topbar{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;right:12px;display:flex;justify-content:space-between;align-items:start}
+.stat{min-width:82px;padding:8px 12px;border:1px solid rgba(255,255,255,.08);background:rgba(7,9,13,.52);backdrop-filter:blur(10px);border-radius:12px}.stat.center{text-align:center}.stat.right{text-align:right}
+.stat small{display:block;font-size:8px;letter-spacing:.16em;color:#9ea6b0}.stat b{font-size:22px}
+.healthWrap{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:min(210px,36vw)}
+.healthLabel{font-size:10px;letter-spacing:.12em;margin-bottom:5px;color:#ddd}.healthBar{height:7px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}.healthBar div{height:100%;width:100%;background:linear-gradient(90deg,#ff2e2e,#ff8a22);transition:width .15s}
+.ammo{position:absolute;right:22px;bottom:calc(20px + env(safe-area-inset-bottom));font-size:36px;font-weight:900;letter-spacing:-.06em;text-shadow:0 2px 15px #000}.ammo small{font-size:18px;color:#777;margin:0 3px}.ammo span:last-child{font-size:18px;color:#a8afb8}
+.fire,.reload{pointer-events:auto;position:absolute;border:1px solid rgba(255,255,255,.12);color:#fff;font-weight:900}
+.fire{right:28px;bottom:calc(86px + env(safe-area-inset-bottom));width:82px;height:82px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff5a42,#b10c0c 70%);box-shadow:0 0 0 10px rgba(255,30,30,.09),0 10px 30px rgba(0,0,0,.5)}
+.fire:active{transform:scale(.93)}
+.reload{right:125px;bottom:calc(96px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;background:rgba(10,14,20,.62);backdrop-filter:blur(8px);font-size:22px}.reload span{display:block;font-size:7px;letter-spacing:.1em}
+.joystick{pointer-events:auto;position:absolute;left:24px;bottom:calc(74px + env(safe-area-inset-bottom));width:132px;height:132px}.joystickRing{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);box-shadow:inset 0 0 20px rgba(255,255,255,.03)}.stick{position:absolute;width:56px;height:56px;border-radius:50%;left:38px;top:38px;background:rgba(255,255,255,.19);border:1px solid rgba(255,255,255,.2);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+#lookZone{pointer-events:auto;position:absolute;right:0;top:72px;bottom:170px;width:58%}
+.hitmarker,.headshot,.combo,.roundBanner{position:absolute;left:50%;transform:translateX(-50%);text-shadow:0 4px 15px #000}
+.hitmarker{top:50%;font-size:28px;opacity:0;transition:opacity .08s}.hitmarker.show{opacity:1}.hitmarker.head{color:#ffcf49;transform:translate(-50%,-4px) scale(1.25)}
+.headshot{top:40%;font-weight:950;font-size:16px;letter-spacing:.18em;color:#ffd253;opacity:0}.headshot.show{animation:pop .45s}
+.combo{top:32%;font-size:20px;font-weight:900;color:#ffdb74}
+#damageFlash{position:absolute;inset:0;opacity:0;background:radial-gradient(circle,transparent 45%,rgba(190,0,0,.55));transition:opacity .12s}
+.roundBanner{top:32%;display:grid;text-align:center;opacity:0}.roundBanner small{letter-spacing:.35em;color:#aeb4bd}.roundBanner strong{font-size:72px;line-height:.9}.roundBanner.show{animation:round 1.9s}
+.upgradePanel{pointer-events:auto;position:absolute;inset:0;display:grid;place-content:center;padding:22px;background:rgba(3,5,8,.88);backdrop-filter:blur(7px)}
+.upgradePanel h2{text-align:center;font-size:19px;letter-spacing:.12em}
+#upgradeCards{display:flex;gap:12px;max-width:760px}
+.upgradeCard{flex:1;min-width:0;padding:20px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#141923,#090c12);color:#fff;text-align:left}.upgradeCard b{display:block;font-size:16px}.upgradeCard span{display:block;color:#aab2bd;font-size:12px;margin-top:8px}.upgradeCard em{display:block;color:#ff6157;font-style:normal;font-size:10px;font-weight:900;margin-bottom:8px}
+@keyframes pop{0%{opacity:0;transform:translateX(-50%) scale(.5)}25%{opacity:1;transform:translateX(-50%) scale(1.18)}100%{opacity:0;transform:translateX(-50%) translateY(-14px)}}
+@keyframes round{0%{opacity:0;transform:translateX(-50%) scale(.7)}20%,75%{opacity:1;transform:translateX(-50%) scale(1)}100%{opacity:0;transform:translateX(-50%) scale(1.18)}}
+@media(max-width:700px){.topbar{top:calc(8px + env(safe-area-inset-top))}.stat{padding:6px 9px;min-width:70px}.stat b{font-size:18px}.joystick{left:16px}.fire{right:18px}.reload{right:112px}#upgradeCards{flex-direction:column}.upgradeCard{padding:14px}}
+@media(orientation:portrait){.panel:after{content:"Pour une meilleure expérience, tourne ton téléphone en paysage.";display:block;margin-top:16px;color:#ff9b63;font-size:12px}}
