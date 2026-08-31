@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#07090d" />
+  <title>Nightfall Zombies</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="game"></div>
+
+  <div id="startScreen" class="screen">
+    <div class="panel">
+      <div class="eyebrow">MOBILE FPS SURVIVAL</div>
+      <h1>NIGHTFALL<br><span>ZOMBIES</span></h1>
+      <p>Survis aux vagues. Vise la tête. Améliore ton arsenal.</p>
+      <button id="startBtn">JOUER</button>
+      <div class="tips">
+        <span>◉ Joystick gauche : déplacement</span>
+        <span>☝ Glisse à droite : viser</span>
+        <span>● Bouton rouge : tirer</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="hud" class="hidden">
+    <div class="topbar">
+      <div class="stat"><small>VAGUE</small><b id="wave">1</b></div>
+      <div class="stat center"><small>SCORE</small><b id="score">0</b></div>
+      <div class="stat right"><small>ZOMBIES</small><b id="remaining">0</b></div>
+    </div>
+
+    <div id="combo" class="combo"></div>
+    <div id="hitmarker" class="hitmarker">✕</div>
+    <div id="headshot" class="headshot">HEADSHOT</div>
+    <div id="damageFlash"></div>
+
+    <div class="healthWrap">
+      <div class="healthLabel">HP <b id="healthText">100</b></div>
+      <div class="healthBar"><div id="healthFill"></div></div>
+    </div>
+
+    <div class="ammo">
+      <span id="ammo">30</span><small>/</small><span id="reserve">180</span>
+    </div>
+
+    <button id="reloadBtn" class="reload">↻<span>RELOAD</span></button>
+    <button id="fireBtn" class="fire">FIRE</button>
+
+    <div id="joystick" class="joystick">
+      <div class="joystickRing"></div>
+      <div id="stick" class="stick"></div>
+    </div>
+    <div id="lookZone"></div>
+
+    <div id="roundBanner" class="roundBanner">
+      <small>WAVE</small><strong>1</strong>
+    </div>
+
+    <div id="upgradePanel" class="upgradePanel hidden">
+      <h2>CHOISIS UNE AMÉLIORATION</h2>
+      <div id="upgradeCards"></div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="./game.js"></script>
+  <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>
